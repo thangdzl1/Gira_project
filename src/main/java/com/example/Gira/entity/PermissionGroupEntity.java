@@ -1,7 +1,5 @@
 package com.example.Gira.entity;
 
-import com.example.Gira.entity.ids.GroupPermissionIds;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -18,11 +16,29 @@ public class PermissionGroupEntity {
     @Column(name = "desc")
     private String desc;
 
-    @OneToMany(mappedBy = "permissionGroupEntity")
-    private Set<GroupPermissionEntity> permissionEntity;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
-    @OneToMany(mappedBy = "permissionGroupEntity")
-    private Set<GroupPermissionUserEntity> groupPermissionUserEntities;
+    @ManyToOne
+    @JoinColumn(name = "permission_id")
+    private PermissionEntity permission;
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+
+    public PermissionEntity getPermission() {
+        return permission;
+    }
+
+    public void setPermission(PermissionEntity permission) {
+        this.permission = permission;
+    }
 
     public int getId() {
         return id;
@@ -46,21 +62,5 @@ public class PermissionGroupEntity {
 
     public void setDesc(String desc) {
         this.desc = desc;
-    }
-
-    public Set<GroupPermissionEntity> getPermissionEntity() {
-        return permissionEntity;
-    }
-
-    public void setPermissionEntity(Set<GroupPermissionEntity> permissionEntity) {
-        this.permissionEntity = permissionEntity;
-    }
-
-    public Set<GroupPermissionUserEntity> getGroupPermissionUserEntities() {
-        return groupPermissionUserEntities;
-    }
-
-    public void setGroupPermissionUserEntities(Set<GroupPermissionUserEntity> groupPermissionUserEntities) {
-        this.groupPermissionUserEntities = groupPermissionUserEntities;
     }
 }

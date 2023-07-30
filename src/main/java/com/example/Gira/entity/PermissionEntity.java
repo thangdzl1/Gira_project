@@ -16,11 +16,41 @@ public class PermissionEntity {
     @Column(name = "desc")
     private String desc;
 
-    @OneToMany(mappedBy = "permission")
-    private Set<UserPermissionEntity> permission;
+    @ManyToOne
+    @JoinColumn(name = "function_id")
+    private FunctionEntity function;
 
-    @OneToMany(mappedBy = "permissionEntity")
-    private Set<GroupPermissionEntity> groupPermission;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
+
+    @OneToMany(mappedBy = "permission")
+    private Set<PermissionGroupEntity> permisionGroup;
+
+
+    public FunctionEntity getFunction() {
+        return function;
+    }
+
+    public void setFunction(FunctionEntity function) {
+        this.function = function;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+
+    public Set<PermissionGroupEntity> getPermisionGroup() {
+        return permisionGroup;
+    }
+
+    public void setPermisionGroup(Set<PermissionGroupEntity> permisionGroup) {
+        this.permisionGroup = permisionGroup;
+    }
 
     public int getId() {
         return id;
@@ -44,21 +74,5 @@ public class PermissionEntity {
 
     public void setDesc(String desc) {
         this.desc = desc;
-    }
-
-    public Set<UserPermissionEntity> getPermission() {
-        return permission;
-    }
-
-    public void setPermission(Set<UserPermissionEntity> permission) {
-        this.permission = permission;
-    }
-
-    public Set<GroupPermissionEntity> getGroupPermission() {
-        return groupPermission;
-    }
-
-    public void setGroupPermission(Set<GroupPermissionEntity> groupPermission) {
-        this.groupPermission = groupPermission;
     }
 }

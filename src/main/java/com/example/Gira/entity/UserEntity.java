@@ -42,11 +42,27 @@ public class UserEntity {
     @OneToMany(mappedBy = "managerId")
     private Set<ProjectEntity> managerId;
 
-    @OneToMany(mappedBy = "permission")
-    private Set<UserPermissionEntity> userPermission;
+    @OneToMany(mappedBy = "user")
+    private Set<PermissionEntity> permission;
 
-    @OneToMany(mappedBy = "userEntity")
-    private Set<GroupPermissionUserEntity> groupPermission;
+    @OneToMany(mappedBy = "user")
+    private Set<PermissionGroupEntity> permissionGroup;
+
+    public Set<PermissionEntity> getPermission() {
+        return permission;
+    }
+
+    public void setPermission(Set<PermissionEntity> permission) {
+        this.permission = permission;
+    }
+
+    public Set<PermissionGroupEntity> getPermissionGroup() {
+        return permissionGroup;
+    }
+
+    public void setPermissionGroup(Set<PermissionGroupEntity> permissionGroup) {
+        this.permissionGroup = permissionGroup;
+    }
 
     public int getId() {
         return id;
@@ -134,21 +150,5 @@ public class UserEntity {
 
     public void setManagerId(Set<ProjectEntity> managerId) {
         this.managerId = managerId;
-    }
-
-    public Set<UserPermissionEntity> getUserPermission() {
-        return userPermission;
-    }
-
-    public void setUserPermission(Set<UserPermissionEntity> userPermission) {
-        this.userPermission = userPermission;
-    }
-
-    public Set<GroupPermissionUserEntity> getGroupPermission() {
-        return groupPermission;
-    }
-
-    public void setGroupPermission(Set<GroupPermissionUserEntity> groupPermission) {
-        this.groupPermission = groupPermission;
     }
 }
