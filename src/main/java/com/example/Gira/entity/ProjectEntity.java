@@ -1,6 +1,5 @@
 package com.example.Gira.entity;
 
-import org.springframework.security.core.userdetails.User;
 
 import javax.persistence.*;
 
