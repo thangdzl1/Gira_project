@@ -23,6 +23,9 @@ public class SecurityConfig {
     }
 
     @Autowired
+    private CustomAuthenProvider customAuthenProvider;
+
+    @Autowired
     private JwtFilter jwtFilter;
 
     public AuthenticationManager authenticationManager(HttpSecurity httpSecurity) throws Exception {
@@ -30,9 +33,6 @@ public class SecurityConfig {
                 .authenticationProvider(customAuthenProvider)
                 .build();
     }
-
-    @Autowired
-    private CustomAuthenProvider customAuthenProvider;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

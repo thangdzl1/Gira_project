@@ -3,6 +3,7 @@ package com.example.Gira.provider;
 import com.example.Gira.entity.UserEntity;
 import com.example.Gira.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,6 +19,7 @@ public class CustomAuthenProvider implements AuthenticationProvider {
     private UserRepository userRepository;
 
     @Autowired
+    @Lazy   // Thông báo chạy cuối cùng
     private PasswordEncoder passwordEncoder;
 
     @Override
