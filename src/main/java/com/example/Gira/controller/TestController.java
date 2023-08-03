@@ -16,7 +16,7 @@ import javax.crypto.SecretKey;
 public class TestController {
     @GetMapping("/createSecretKey")
     public ResponseEntity<?> createSecretKey(){
-        SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.ES256);
+        SecretKey secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
         String key = Encoders.BASE64.encode(secretKey.getEncoded());
         System.out.println(key);
         return new ResponseEntity<>("", HttpStatus.OK);
