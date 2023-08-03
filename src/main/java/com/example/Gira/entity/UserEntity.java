@@ -36,6 +36,10 @@ public class UserEntity {
     @JoinColumn(name = "user_desc_id")
     private UserDescEntity userDescId;
 
+    @ManyToOne
+    @JoinColumn(name = "permission_group_id")
+    private PermissionGroupEntity permissionGroup;
+
     @OneToMany(mappedBy = "creatorId")
     private Set<ProjectEntity> creatorId;
 
@@ -45,8 +49,6 @@ public class UserEntity {
     @OneToMany(mappedBy = "user")
     private Set<PermissionEntity> permission;
 
-    @OneToMany(mappedBy = "user")
-    private Set<PermissionGroupUserEntity> permissionGroupUser;
 
     public Set<PermissionEntity> getPermission() {
         return permission;
@@ -54,14 +56,6 @@ public class UserEntity {
 
     public void setPermission(Set<PermissionEntity> permission) {
         this.permission = permission;
-    }
-
-    public Set<PermissionGroupUserEntity> getPermissionGroupUser() {
-        return permissionGroupUser;
-    }
-
-    public void setPermissionGroupUser(Set<PermissionGroupUserEntity> permissionGroupUser) {
-        this.permissionGroupUser = permissionGroupUser;
     }
 
     public int getId() {

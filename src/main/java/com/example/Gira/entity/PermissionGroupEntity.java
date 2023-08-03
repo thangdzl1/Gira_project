@@ -1,5 +1,7 @@
 package com.example.Gira.entity;
 
+import org.apache.catalina.User;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -25,7 +27,7 @@ public class PermissionGroupEntity {
     private PermissionEntity permission;
 
     @OneToMany(mappedBy = "permissionGroup")
-    private Set<PermissionGroupUserEntity> permissionGroupUser;
+    private Set<UserEntity> userGroup;
 
     public UserEntity getUser() {
         return user;

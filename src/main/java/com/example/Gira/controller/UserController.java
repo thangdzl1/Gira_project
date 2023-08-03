@@ -48,7 +48,7 @@ public class UserController {
 
     }
 
-    @PostMapping("/add-user")
+    @PostMapping("/add")
     public ResponseEntity<?> addUser(@Valid UserAddRequest request, BindingResult result){
 
         List<FieldError> errors = result.getFieldErrors();
