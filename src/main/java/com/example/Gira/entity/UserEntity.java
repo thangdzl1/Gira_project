@@ -58,6 +58,14 @@ public class UserEntity {
         this.permission = permission;
     }
 
+    public PermissionGroupEntity getPermissionGroup() {
+        return permissionGroup;
+    }
+
+    public void setPermissionGroup(PermissionGroupEntity permissionGroup) {
+        this.permissionGroup = permissionGroup;
+    }
+
     public int getId() {
         return id;
     }

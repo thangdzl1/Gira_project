@@ -21,6 +21,9 @@ public class UserAddRequest {
     @Email(message = "must be email form")
     private String email;
 
+    @NotNull(message = "permission group must not null")
+    private int permission_group_id;
+
     private String fullname;
 
     public String getUsername() {
@@ -53,5 +56,13 @@ public class UserAddRequest {
 
     public void setFullname(String fullname) {
         this.fullname = fullname;
+    }
+
+    public int getPermission_group_id() {
+        return permission_group_id;
+    }
+
+    public void setPermission_group_id(int permission_group_id) {
+        this.permission_group_id = permission_group_id;
     }
 }

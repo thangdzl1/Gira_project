@@ -68,4 +68,12 @@ public class PermissionGroupEntity {
     public void setDesc(String desc) {
         this.desc = desc;
     }
+
+    public Set<UserEntity> getUserGroup() {
+        return userGroup;
+    }
+
+    public void setUserGroup(Set<UserEntity> userGroup) {
+        this.userGroup = userGroup;
+    }
 }
