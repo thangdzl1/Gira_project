@@ -24,6 +24,9 @@ public class PermissionGroupEntity {
     @JoinColumn(name = "permission_id")
     private PermissionEntity permission;
 
+    @OneToMany(mappedBy = "permissionGroup")
+    private Set<PermissionGroupUserEntity> permissionGroupUser;
+
     public UserEntity getUser() {
         return user;
     }

@@ -46,7 +46,7 @@ public class UserEntity {
     private Set<PermissionEntity> permission;
 
     @OneToMany(mappedBy = "user")
-    private Set<PermissionGroupEntity> permissionGroup;
+    private Set<PermissionGroupUserEntity> permissionGroupUser;
 
     public Set<PermissionEntity> getPermission() {
         return permission;
@@ -56,12 +56,12 @@ public class UserEntity {
         this.permission = permission;
     }
 
-    public Set<PermissionGroupEntity> getPermissionGroup() {
-        return permissionGroup;
+    public Set<PermissionGroupUserEntity> getPermissionGroupUser() {
+        return permissionGroupUser;
     }
 
-    public void setPermissionGroup(Set<PermissionGroupEntity> permissionGroup) {
-        this.permissionGroup = permissionGroup;
+    public void setPermissionGroupUser(Set<PermissionGroupUserEntity> permissionGroupUser) {
+        this.permissionGroupUser = permissionGroupUser;
     }
 
     public int getId() {
