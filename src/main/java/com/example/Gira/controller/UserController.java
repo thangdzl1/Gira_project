@@ -9,6 +9,8 @@ import com.example.Gira.utils.JwtHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -23,7 +25,7 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private CustomAuthenProvider customAuthenProvider;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     private JwtHelper jwtHelper;
@@ -31,15 +33,16 @@ public class UserController {
     @Autowired
     private UserServiceImp userServiceImp;
 
+
     @PostMapping("/login")
     public ResponseEntity<?> login(
             @RequestParam String username,
             @RequestParam String password
-    ){
+    ) {
 
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username,password);
-        customAuthenProvider.authenticate(token);
-        String jwt =jwtHelper.generateToken("");
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
+        authenticationManager.authenticate(token);
+        String jwt = jwtHelper.generateToken(username);
 
         BaseResponse baseResponse = new BaseResponse();
         baseResponse.setStatusCode(200);
@@ -49,10 +52,10 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addUser(@Valid UserAddRequest request, BindingResult result){
+    public ResponseEntity<?> userAdd(@Valid UserAddRequest request, BindingResult result) {
 
         List<FieldError> errors = result.getFieldErrors();
-        for (FieldError error: errors) {
+        for (FieldError error : errors) {
             throw new CustomException(error.getDefaultMessage());
         }
 
@@ -62,8 +65,17 @@ public class UserController {
         baseResponse.setData(isSuccess);
         baseResponse.setStatusCode(200);
 
-        return new ResponseEntity<>(baseResponse,HttpStatus.OK);
+        return new ResponseEntity<>(baseResponse, HttpStatus.OK);
     }
 
+    @GetMapping("/authenticate")
+    public ResponseEntity<?> userAuthenticate() {
+        boolean isSuccess = true;
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setData(isSuccess);
+        baseResponse.setStatusCode(200);
+
+        return new ResponseEntity<>(baseResponse, HttpStatus.OK);
+    }
 
 }

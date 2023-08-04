@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
+import java.security.Key;
 
 @Component
 public class JwtHelper {
@@ -16,7 +17,7 @@ public class JwtHelper {
     private String secretKey;
 
     public String generateToken(String data){
-        SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey));
+        Key key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey));
         return  Jwts.builder()
                 .setSubject(data)
                 .signWith(key)
@@ -24,7 +25,7 @@ public class JwtHelper {
     }
 
     public Claims decodeToken(String token){
-        SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey));
+        Key key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey));
         return Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()

@@ -28,6 +28,7 @@ public class SecurityConfig {
     @Autowired
     private JwtFilter jwtFilter;
 
+    @Bean
     public AuthenticationManager authenticationManager(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.getSharedObject(AuthenticationManagerBuilder.class)
                 .authenticationProvider(customAuthenProvider)
@@ -40,8 +41,8 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)//khai báo không sử dụng session
                 .and()
                 .authorizeHttpRequests()//qui định lại các rule liên quan đến chứng thực cho link được gọi
-                .antMatchers("/user/login","/test/**").permitAll()
-                .anyRequest().authenticated()//tất cả các link còn lại phải được chứng thực
+                    .antMatchers("/user/login","/test/**").permitAll()
+                    .anyRequest().authenticated()//tất cả các link còn lại phải được chứng thực
                 .and()
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

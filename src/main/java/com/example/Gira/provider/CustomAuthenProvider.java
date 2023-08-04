@@ -9,25 +9,30 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
-@Component
+@Service
 public class CustomAuthenProvider implements AuthenticationProvider {
+
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
-    @Lazy   // Thông báo chạy cuối cùng
+    @Lazy
     private PasswordEncoder passwordEncoder;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+
+        //Lấy username người dùng truyền vào
         String username = authentication.getName();
-        String password = authentication.getCredentials().toString();// getCredentials <=> password
+        //Lấy password người dùng truyền vào
+        String password = authentication.getCredentials().toString();
         UserEntity user = userRepository.findByUsername(username);
-        if (user!=null && passwordEncoder.matches(user.getPassword(), password)){
+        if (user!=null && passwordEncoder.matches(password,user.getPassword())){
+            //Đăng nhập thành công
             return new UsernamePasswordAuthenticationToken(username,user.getPassword(),new ArrayList<>());
         }
         return null;
@@ -35,6 +40,9 @@ public class CustomAuthenProvider implements AuthenticationProvider {
 
     @Override
     public boolean supports(Class<?> authentication) {
+
+        //khai báo loại chứng thực cho AuthenProvider sử dụng để so sánh
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
+
     }
 }

@@ -21,7 +21,7 @@ public class UserAddRequest {
     @Email(message = "must be email form")
     private String email;
 
-    @NotNull(message = "permission group must not null")
+//    @NotNull(message = "permission group must not null")
     private int permission_group_id;
 
     private String fullname;
