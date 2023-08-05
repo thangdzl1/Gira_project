@@ -1,5 +1,6 @@
 package com.example.Gira.controller;
 
+import com.example.Gira.entity.UserEntity;
 import com.example.Gira.exception.CustomException;
 import com.example.Gira.payload.request.UserAddRequest;
 import com.example.Gira.payload.response.BaseResponse;
@@ -21,7 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "*")
+@CrossOrigin
 public class UserController {
 
     @Autowired
@@ -77,5 +78,15 @@ public class UserController {
 
         return new ResponseEntity<>(baseResponse, HttpStatus.OK);
     }
+
+    @GetMapping("/table")
+    public ResponseEntity<?> userTable(){
+
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setStatusCode(200);
+        baseResponse.setData(userServiceImp.getAllUser());
+        return new ResponseEntity<>(baseResponse, HttpStatus.OK);
+    }
+
 
 }

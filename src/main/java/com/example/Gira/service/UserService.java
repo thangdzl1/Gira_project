@@ -4,6 +4,7 @@ import com.example.Gira.entity.PermissionGroupEntity;
 import com.example.Gira.entity.UserEntity;
 import com.example.Gira.exception.CustomException;
 import com.example.Gira.payload.request.UserAddRequest;
+import com.example.Gira.payload.response.UserResponse;
 import com.example.Gira.repository.PermissionGroupRepository;
 import com.example.Gira.repository.UserRepository;
 import com.example.Gira.service.Imp.UserServiceImp;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -40,5 +43,21 @@ public class UserService implements UserServiceImp {
             throw new CustomException(e.getMessage());
         }
         return isSuccess;
+    }
+
+    @Override
+    public List<UserResponse> getAllUser() {
+        List<UserResponse> responseList = new ArrayList<>();
+        List<UserEntity> list = userRepository.findAll();
+        for (UserEntity user : list){
+            UserResponse userResponse = new UserResponse();
+            userResponse.setUsername(user.getUsername());
+            userResponse.setFullname(user.getFullname());
+            userResponse.setEmail(user.getEmail());
+            userResponse.setAvatar(user.getAvatar());
+
+            responseList.add(userResponse);
+        }
+        return responseList;
     }
 }
