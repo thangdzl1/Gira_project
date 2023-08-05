@@ -40,7 +40,7 @@ public class UserService implements UserServiceImp {
             userRepository.save(user);
             isSuccess = true;
         }catch (Exception e){
-            throw new CustomException(e.getMessage());
+            throw new CustomException("Error addUser: " + e.getMessage());
         }
         return isSuccess;
     }
@@ -48,16 +48,34 @@ public class UserService implements UserServiceImp {
     @Override
     public List<UserResponse> getAllUser() {
         List<UserResponse> responseList = new ArrayList<>();
-        List<UserEntity> list = userRepository.findAll();
-        for (UserEntity user : list){
-            UserResponse userResponse = new UserResponse();
-            userResponse.setUsername(user.getUsername());
-            userResponse.setFullname(user.getFullname());
-            userResponse.setEmail(user.getEmail());
-            userResponse.setAvatar(user.getAvatar());
 
-            responseList.add(userResponse);
+        try {
+            List<UserEntity> list = userRepository.findAll();
+            for (UserEntity user : list){
+                UserResponse userResponse = new UserResponse();
+                userResponse.setUsername(user.getUsername());
+                userResponse.setFullname(user.getFullname());
+                userResponse.setEmail(user.getEmail());
+                userResponse.setAvatar(user.getAvatar());
+
+                responseList.add(userResponse);
+            }
+        }catch (Exception e){
+            throw new CustomException("Error GetAllUser: " + e.getMessage());
         }
         return responseList;
+    }
+
+    @Override
+    public boolean deleteUser(int id) {
+        boolean isSuccess = false;
+        try {
+            userRepository.deleteById(id);
+            isSuccess = true;
+        }catch (Exception e){
+            throw new CustomException("Error deleteUser: " + e.getMessage());
+        }
+
+        return isSuccess;
     }
 }

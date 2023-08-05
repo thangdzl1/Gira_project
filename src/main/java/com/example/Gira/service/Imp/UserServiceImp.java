@@ -10,4 +10,5 @@ import java.util.List;
 public interface UserServiceImp {
     boolean addUser(UserAddRequest request);
     List<UserResponse> getAllUser();
+    boolean deleteUser(int id);
 }

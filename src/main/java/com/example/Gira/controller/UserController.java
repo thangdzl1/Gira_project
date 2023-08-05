@@ -88,5 +88,20 @@ public class UserController {
         return new ResponseEntity<>(baseResponse, HttpStatus.OK);
     }
 
+    @GetMapping("/delete/{id}")
+    public ResponseEntity<?> userDelete(
+            @PathVariable int id
+    ){
+        boolean isSuccess = false;
+
+        userServiceImp.deleteUser(id);
+
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setData(isSuccess);
+        baseResponse.setStatusCode(200);
+
+        return new ResponseEntity<>(baseResponse,HttpStatus.OK);
+    }
+
 
 }
