@@ -17,24 +17,12 @@ public class PermissionEntity {
     private String desc;
 
     @ManyToOne
-    @JoinColumn(name = "function_id")
-    private FunctionEntity function;
-
-    @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
     @OneToMany(mappedBy = "permission")
     private Set<PermissionGroupEntity> permisionGroup;
 
-
-    public FunctionEntity getFunction() {
-        return function;
-    }
-
-    public void setFunction(FunctionEntity function) {
-        this.function = function;
-    }
 
     public UserEntity getUser() {
         return user;

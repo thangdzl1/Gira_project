@@ -89,13 +89,11 @@ public class UserController {
     }
 
     @GetMapping("/delete/{id}")
-    public ResponseEntity<?> userDelete(
-            @PathVariable int id
-    ){
+    public ResponseEntity<?> userDelete(@PathVariable int id){
         boolean isSuccess = false;
 
         userServiceImp.deleteUser(id);
-
+        isSuccess = true;
         BaseResponse baseResponse = new BaseResponse();
         baseResponse.setData(isSuccess);
         baseResponse.setStatusCode(200);
@@ -103,5 +101,8 @@ public class UserController {
         return new ResponseEntity<>(baseResponse,HttpStatus.OK);
     }
 
-
+//    @GetMapping
+//    public ResponseEntity<?> userEdit(@PathVariable ){
+//
+//    }
 }

@@ -8,11 +8,4 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PermissionGroupService implements PermissionGroupImp {
-    @Autowired
-    private PermissionGroupRepository permissionGroupRepository;
-
-    @Override
-    public PermissionGroupEntity findById(int id) {
-        return permissionGroupRepository.findById(id);
-    }
 }

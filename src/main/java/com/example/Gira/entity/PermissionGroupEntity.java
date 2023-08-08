@@ -19,23 +19,11 @@ public class PermissionGroupEntity {
     private String desc;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
-
-    @ManyToOne
     @JoinColumn(name = "permission_id")
     private PermissionEntity permission;
 
     @OneToMany(mappedBy = "permissionGroup")
     private Set<UserEntity> userGroup;
-
-    public UserEntity getUser() {
-        return user;
-    }
-
-    public void setUser(UserEntity user) {
-        this.user = user;
-    }
 
     public PermissionEntity getPermission() {
         return permission;
@@ -76,4 +64,5 @@ public class PermissionGroupEntity {
     public void setUserGroup(Set<UserEntity> userGroup) {
         this.userGroup = userGroup;
     }
+
 }

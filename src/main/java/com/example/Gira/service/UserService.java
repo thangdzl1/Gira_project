@@ -36,7 +36,8 @@ public class UserService implements UserServiceImp {
             user.setPassword(passwordEncoder.encode(request.getPassword()));
             user.setFullname(request.getFullname());
             user.setEmail(request.getEmail());
-//            user.setPermissionGroup(permissionGroupRepository.findById(request.getPermission_group_id()));
+            PermissionGroupEntity permissionGroupEntity = permissionGroupRepository.findById(request.getPermission_group_id());
+            user.setPermissionGroup(permissionGroupEntity);
             userRepository.save(user);
             isSuccess = true;
         }catch (Exception e){
