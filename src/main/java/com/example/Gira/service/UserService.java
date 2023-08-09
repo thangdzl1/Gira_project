@@ -1,10 +1,13 @@
 package com.example.Gira.service;
 
+import com.example.Gira.entity.AcctStatEntity;
 import com.example.Gira.entity.PermissionGroupEntity;
 import com.example.Gira.entity.UserEntity;
 import com.example.Gira.exception.CustomException;
 import com.example.Gira.payload.request.UserAddRequest;
+import com.example.Gira.payload.request.UserUpdateRequest;
 import com.example.Gira.payload.response.UserResponse;
+import com.example.Gira.repository.AcctStatRepository;
 import com.example.Gira.repository.PermissionGroupRepository;
 import com.example.Gira.repository.UserRepository;
 import com.example.Gira.service.Imp.UserServiceImp;
@@ -14,7 +17,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService implements UserServiceImp {
@@ -26,6 +28,9 @@ public class UserService implements UserServiceImp {
 
     @Autowired
     private PermissionGroupRepository permissionGroupRepository;
+
+    @Autowired
+    private AcctStatRepository acctStatRepository;
 
     @Override
     public boolean addUser(UserAddRequest request) {
@@ -76,7 +81,32 @@ public class UserService implements UserServiceImp {
         }catch (Exception e){
             throw new CustomException("Error deleteUser: " + e.getMessage());
         }
+        return isSuccess;
+    }
+
+    @Override
+    public boolean updateUser(UserUpdateRequest request) {
+        boolean isSuccess = false;
+        try {
+
+            UserEntity user = userRepository.findById(request.getId());
+            user.setUsername(request.getUsername());
+            user.setEmail(request.getEmail());
+            user.setFullname(request.getFullname());
+            PermissionGroupEntity permissionGroupEntity = permissionGroupRepository.findById(request.getPermission_group_id());
+            user.setPermissionGroup(permissionGroupEntity);
+            AcctStatEntity acctStatEntity = acctStatRepository.findById(request.getAcct_stat_id());
+            user.setAcct_stat(acctStatEntity);
+            userRepository.save(user);
+            isSuccess = true;
+
+            isSuccess = true;
+        }catch (Exception e){
+            throw new CustomException("Error updateUser: "+ e.getMessage());
+        }
 
         return isSuccess;
     }
+
+
 }

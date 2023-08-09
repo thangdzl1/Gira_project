@@ -1,17 +1,15 @@
 package com.example.Gira.controller;
 
-import com.example.Gira.entity.UserEntity;
 import com.example.Gira.exception.CustomException;
 import com.example.Gira.payload.request.UserAddRequest;
+import com.example.Gira.payload.request.UserUpdateRequest;
 import com.example.Gira.payload.response.BaseResponse;
-import com.example.Gira.provider.CustomAuthenProvider;
 import com.example.Gira.service.Imp.UserServiceImp;
 import com.example.Gira.utils.JwtHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -101,8 +99,20 @@ public class UserController {
         return new ResponseEntity<>(baseResponse,HttpStatus.OK);
     }
 
-//    @GetMapping
-//    public ResponseEntity<?> userEdit(@PathVariable ){
-//
-//    }
+    @PostMapping("/update")
+    public ResponseEntity<?> userUpdate(@Valid UserUpdateRequest request, BindingResult result ){
+        List<FieldError> errors = result.getFieldErrors();
+        for (FieldError error : errors) {
+            throw new CustomException(error.getDefaultMessage());
+        }
+
+        boolean isSuccess = userServiceImp.updateUser(request);
+
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setData(isSuccess);
+        baseResponse.setStatusCode(200);
+
+        return new ResponseEntity<>(baseResponse, HttpStatus.OK);
+    }
+
 }
