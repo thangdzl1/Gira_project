@@ -11,68 +11,116 @@ public class TasksEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "desc")
-    private String desc;
+    @ManyToOne
+    @JoinColumn(name = "manager_id")
+    private UserEntity manager;
 
     @ManyToOne
     @JoinColumn(name = "task_status_id")
-    private TaskProcessEntity taskStatusId;
+    private TaskStatusEntity taskStatus;
 
     @ManyToOne
-    @JoinColumn(name = "task_link_id")
-    private TaskProcessLinksEntity taskLinkId;
+    @JoinColumn(name = "tasks_type_id")
+    private TaskTypeEntity taskType;
+
+    @ManyToOne
+    @JoinColumn(name = "basic_info_id")
+    private BasicInfoEntity basicInfo;
+
+    @ManyToOne
+    @JoinColumn(name = "plan_info_id")
+    private PlanInfoEntity planInfo;
+
+    @ManyToOne
+    @JoinColumn(name = "history_info_id")
+    private HistoryInfoEntity historyInfo;
+
+    @OneToMany(mappedBy = "tasks")
+    private Set<AdditionalTaskEntity> additionalTask;
+
+    @OneToMany(mappedBy = "taskId")
+    private Set<CommentInfoEntity> commentInfo;
+
+    @OneToMany(mappedBy = "tasks")
+    private Set<ProgressInfoEntity> progressInfo;
+
+    public Set<ProgressInfoEntity> getProgressInfo() {
+        return progressInfo;
+    }
+
+    public void setProgressInfo(Set<ProgressInfoEntity> progressInfo) {
+        this.progressInfo = progressInfo;
+    }
+
+    public Set<AdditionalTaskEntity> getAdditionalTask() {
+        return additionalTask;
+    }
+
+    public void setAdditionalTask(Set<AdditionalTaskEntity> additionalTask) {
+        this.additionalTask = additionalTask;
+    }
+
+    public Set<CommentInfoEntity> getCommentInfo() {
+        return commentInfo;
+    }
+
+    public void setCommentInfo(Set<CommentInfoEntity> commentInfo) {
+        this.commentInfo = commentInfo;
+    }
 
     public int getId() {
         return id;
-    }
-
-    @OneToMany(mappedBy = "taskId")
-    private Set<ProjectEntity> projectEntities;
-
-    public Set<ProjectEntity> getProjectEntities() {
-        return projectEntities;
-    }
-
-    public void setProjectEntities(Set<ProjectEntity> projectEntities) {
-        this.projectEntities = projectEntities;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public UserEntity getManager() {
+        return manager;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setManager(UserEntity manager) {
+        this.manager = manager;
     }
 
-    public String getDesc() {
-        return desc;
+    public TaskStatusEntity getTaskStatus() {
+        return taskStatus;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setTaskStatus(TaskStatusEntity taskStatus) {
+        this.taskStatus = taskStatus;
     }
 
-    public TaskProcessEntity getTaskStatusId() {
-        return taskStatusId;
+    public TaskTypeEntity getTaskType() {
+        return taskType;
     }
 
-    public void setTaskStatusId(TaskProcessEntity taskStatusId) {
-        this.taskStatusId = taskStatusId;
+    public void setTaskType(TaskTypeEntity taskType) {
+        this.taskType = taskType;
     }
 
-    public TaskProcessLinksEntity getTaskLinkId() {
-        return taskLinkId;
+    public BasicInfoEntity getBasicInfo() {
+        return basicInfo;
     }
 
-    public void setTaskLinkId(TaskProcessLinksEntity taskLinkId) {
-        this.taskLinkId = taskLinkId;
+    public void setBasicInfo(BasicInfoEntity basicInfo) {
+        this.basicInfo = basicInfo;
+    }
+
+    public PlanInfoEntity getPlanInfo() {
+        return planInfo;
+    }
+
+    public void setPlanInfo(PlanInfoEntity planInfo) {
+        this.planInfo = planInfo;
+    }
+
+    public HistoryInfoEntity getHistoryInfo() {
+        return historyInfo;
+    }
+
+    public void setHistoryInfo(HistoryInfoEntity historyInfo) {
+        this.historyInfo = historyInfo;
     }
 }

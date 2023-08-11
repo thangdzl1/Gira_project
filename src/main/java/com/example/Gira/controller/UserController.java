@@ -115,4 +115,18 @@ public class UserController {
         return new ResponseEntity<>(baseResponse, HttpStatus.OK);
     }
 
+    @GetMapping("/details/{id}")
+    public ResponseEntity<?> userDetails(@PathVariable int id){
+        boolean isSuccess = false;
+
+        userServiceImp.deleteUser(id);
+        isSuccess = true;
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setData(isSuccess);
+        baseResponse.setStatusCode(200);
+
+
+        return new ResponseEntity<>("",HttpStatus.OK);
+    }
+
 }

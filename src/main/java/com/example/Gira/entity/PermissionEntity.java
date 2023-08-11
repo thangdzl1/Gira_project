@@ -17,27 +17,26 @@ public class PermissionEntity {
     private String desc;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
+    @JoinColumn(name = "permission_group_id")
+    private PermissionGroupEntity permissionGroup;
 
     @OneToMany(mappedBy = "permission")
-    private Set<PermissionGroupEntity> permisionGroup;
+    private Set<UserPermissionEntity> userPermission;
 
-
-    public UserEntity getUser() {
-        return user;
+    public PermissionGroupEntity getPermissionGroup() {
+        return permissionGroup;
     }
 
-    public void setUser(UserEntity user) {
-        this.user = user;
+    public void setPermissionGroup(PermissionGroupEntity permissionGroup) {
+        this.permissionGroup = permissionGroup;
     }
 
-    public Set<PermissionGroupEntity> getPermisionGroup() {
-        return permisionGroup;
+    public Set<UserPermissionEntity> getUserPermission() {
+        return userPermission;
     }
 
-    public void setPermisionGroup(Set<PermissionGroupEntity> permisionGroup) {
-        this.permisionGroup = permisionGroup;
+    public void setUserPermission(Set<UserPermissionEntity> userPermission) {
+        this.userPermission = userPermission;
     }
 
     public int getId() {

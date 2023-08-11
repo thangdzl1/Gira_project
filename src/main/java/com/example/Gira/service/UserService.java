@@ -6,6 +6,7 @@ import com.example.Gira.entity.UserEntity;
 import com.example.Gira.exception.CustomException;
 import com.example.Gira.payload.request.UserAddRequest;
 import com.example.Gira.payload.request.UserUpdateRequest;
+import com.example.Gira.payload.response.UserDetailsResponse;
 import com.example.Gira.payload.response.UserResponse;
 import com.example.Gira.repository.AcctStatRepository;
 import com.example.Gira.repository.PermissionGroupRepository;
@@ -108,5 +109,19 @@ public class UserService implements UserServiceImp {
         return isSuccess;
     }
 
+    @Override
+    public UserDetailsResponse detailsUser(int id) {
+        boolean isSuccess = false;
+        try {
+
+            UserEntity user = userRepository.findById(id);
+
+            isSuccess = true;
+        }catch (Exception e){
+            throw new CustomException("Error detailsUser: "+ e.getMessage());
+        }
+
+        return new UserDetailsResponse();
+    }
 
 }

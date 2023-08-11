@@ -25,12 +25,32 @@ public class ProjectEntity {
     private UserEntity managerId;
 
     @ManyToOne
+    @JoinColumn(name = "task_process_id")
+    private TaskProcessEntity taskProcess;
+
+    @ManyToOne
     @JoinColumn(name = "project_type_id")
     private ProjectTypeEntity typeId;
 
     @ManyToOne
-    @JoinColumn(name = "task_id")
-    private TasksEntity taskId;
+    @JoinColumn(name = "tasks_type_id")
+    private TaskTypeEntity taskType;
+
+    public TaskProcessEntity getTaskProcess() {
+        return taskProcess;
+    }
+
+    public void setTaskProcess(TaskProcessEntity taskProcess) {
+        this.taskProcess = taskProcess;
+    }
+
+    public TaskTypeEntity getTaskType() {
+        return taskType;
+    }
+
+    public void setTaskType(TaskTypeEntity taskType) {
+        this.taskType = taskType;
+    }
 
     public int getId() {
         return id;
@@ -80,11 +100,4 @@ public class ProjectEntity {
         this.typeId = typeId;
     }
 
-    public TasksEntity getTaskId() {
-        return taskId;
-    }
-
-    public void setTaskId(TasksEntity taskId) {
-        this.taskId = taskId;
-    }
 }

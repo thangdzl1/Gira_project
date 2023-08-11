@@ -47,15 +47,105 @@ public class UserEntity {
     private Set<ProjectEntity> managerId;
 
     @OneToMany(mappedBy = "user")
-    private Set<PermissionEntity> permission;
+    private Set<UserPermissionEntity> userPermission;
 
+    @OneToMany(mappedBy = "user")
+    private Set<UserTasksEntity> userTasks;
 
-    public Set<PermissionEntity> getPermission() {
-        return permission;
+    @OneToMany(mappedBy = "manager")
+    private Set<TasksEntity> tasks;
+
+    @OneToMany(mappedBy = "performerId")
+    private Set<AdditionalTaskEntity> additionalTask;
+
+    @OneToMany(mappedBy = "writterId")
+    private Set<CommentInfoEntity> commentInfo;
+
+    @OneToMany(mappedBy = "changerId")
+    private Set<HistoryInfoEntity> historyInfo;
+
+    @OneToMany(mappedBy = "creatorId")
+    private Set<BasicInfoEntity> basicInfoCreatorId;
+
+    @OneToMany(mappedBy = "inchargeId")
+    private Set<BasicInfoEntity> basicInfoInchargeId;
+
+    @OneToMany(mappedBy = "user")
+    private Set<UserFollowingEntity> userFollowing;
+
+    @OneToMany(mappedBy = "user")
+    private Set<ProgressInfoEntity> progressInfo;
+
+    public Set<ProgressInfoEntity> getProgressInfo() {
+        return progressInfo;
     }
 
-    public void setPermission(Set<PermissionEntity> permission) {
-        this.permission = permission;
+    public void setProgressInfo(Set<ProgressInfoEntity> progressInfo) {
+        this.progressInfo = progressInfo;
+    }
+
+    public Set<UserFollowingEntity> getUserFollowing() {
+        return userFollowing;
+    }
+
+    public void setUserFollowing(Set<UserFollowingEntity> userFollowing) {
+        this.userFollowing = userFollowing;
+    }
+
+    public Set<CommentInfoEntity> getCommentInfo() {
+        return commentInfo;
+    }
+
+    public void setCommentInfo(Set<CommentInfoEntity> commentInfo) {
+        this.commentInfo = commentInfo;
+    }
+
+    public Set<BasicInfoEntity> getBasicInfoCreatorId() {
+        return basicInfoCreatorId;
+    }
+
+    public void setBasicInfoCreatorId(Set<BasicInfoEntity> basicInfoCreatorId) {
+        this.basicInfoCreatorId = basicInfoCreatorId;
+    }
+
+    public Set<BasicInfoEntity> getBasicInfoInchargeId() {
+        return basicInfoInchargeId;
+    }
+
+    public void setBasicInfoInchargeId(Set<BasicInfoEntity> basicInfoInchargeId) {
+        this.basicInfoInchargeId = basicInfoInchargeId;
+    }
+
+    public Set<HistoryInfoEntity> getHistoryInfo() {
+        return historyInfo;
+    }
+
+    public void setHistoryInfo(Set<HistoryInfoEntity> historyInfo) {
+        this.historyInfo = historyInfo;
+    }
+
+    public Set<AdditionalTaskEntity> getAdditionalTask() {
+        return additionalTask;
+    }
+
+    public void setAdditionalTask(Set<AdditionalTaskEntity> additionalTask) {
+        this.additionalTask = additionalTask;
+    }
+
+    public Set<TasksEntity> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<TasksEntity> tasks) {
+        this.tasks = tasks;
+    }
+
+    public Set<UserTasksEntity> getUserTasks() {
+        return userTasks;
+    }
+
+    public void setUserTasks(Set<UserTasksEntity> userTasks) {
+        this.userTasks = userTasks;
     }
 
     public PermissionGroupEntity getPermissionGroup() {
@@ -64,6 +154,14 @@ public class UserEntity {
 
     public void setPermissionGroup(PermissionGroupEntity permissionGroup) {
         this.permissionGroup = permissionGroup;
+    }
+
+    public Set<UserPermissionEntity> getUserPermission() {
+        return userPermission;
+    }
+
+    public void setUserPermission(Set<UserPermissionEntity> userPermission) {
+        this.userPermission = userPermission;
     }
 
     public int getId() {

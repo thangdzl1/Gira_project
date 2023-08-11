@@ -1,13 +1,10 @@
 package com.example.Gira.entity;
 
-import org.apache.catalina.User;
-
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity(name = "permission_group")
-public class PermissionGroupEntity {
-
+@Entity(name = "tasks_type")
+public class TaskTypeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -18,11 +15,19 @@ public class PermissionGroupEntity {
     @Column(name = "desc")
     private String desc;
 
-    @OneToMany(mappedBy = "permissionGroup")
-    private Set<UserEntity> user;
+    @OneToMany(mappedBy = "taskType")
+    private Set<ProjectEntity> project;
 
-    @OneToMany(mappedBy = "permissionGroup")
-    private Set<PermissionEntity> permission;
+    @OneToMany(mappedBy = "taskType")
+    private Set<TasksEntity> tasks;
+
+    public Set<TasksEntity> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<TasksEntity> tasks) {
+        this.tasks = tasks;
+    }
 
     public int getId() {
         return id;
@@ -48,19 +53,11 @@ public class PermissionGroupEntity {
         this.desc = desc;
     }
 
-    public Set<UserEntity> getUser() {
-        return user;
+    public Set<ProjectEntity> getProject() {
+        return project;
     }
 
-    public void setUser(Set<UserEntity> user) {
-        this.user = user;
-    }
-
-    public Set<PermissionEntity> getPermission() {
-        return permission;
-    }
-
-    public void setPermission(Set<PermissionEntity> permission) {
-        this.permission = permission;
+    public void setProject(Set<ProjectEntity> project) {
+        this.project = project;
     }
 }
