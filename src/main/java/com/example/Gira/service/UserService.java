@@ -12,6 +12,7 @@ import com.example.Gira.repository.AcctStatRepository;
 import com.example.Gira.repository.PermissionGroupRepository;
 import com.example.Gira.repository.UserRepository;
 import com.example.Gira.service.Imp.UserServiceImp;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -64,7 +65,13 @@ public class UserService implements UserServiceImp {
                 userResponse.setFullname(user.getFullname());
                 userResponse.setEmail(user.getEmail());
                 userResponse.setAvatar(user.getAvatar());
-
+                userResponse.setId(user.getId());
+                if (user.getPermissionGroup() != null) {
+                    userResponse.setRole(user.getPermissionGroup().getName());
+                }
+                if (user.getAcct_stat() != null) {
+                    userResponse.setStatus(user.getAcct_stat().getName());
+                }
                 responseList.add(userResponse);
             }
         }catch (Exception e){
