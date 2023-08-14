@@ -1,8 +1,8 @@
 package com.example.Gira.controller;
 
+import com.example.Gira.payload.response.AcctStatResponse;
 import com.example.Gira.payload.response.BaseResponse;
-import com.example.Gira.payload.response.PermissionGroupResponse;
-import com.example.Gira.service.Imp.PermissionGroupServiceImp;
+import com.example.Gira.service.Imp.AcctStatServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,19 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("permission_group")
+@RequestMapping("acct_stat")
 @CrossOrigin
-public class PermissionGroupController {
+public class AcctStatController {
     @Autowired
-    private PermissionGroupServiceImp permissionGroupServiceImp;
+    private AcctStatServiceImp acctStatServiceImp;
 
     @GetMapping("/get_all")
-    public ResponseEntity<?> getAllPermissionGroup(){
-        List<PermissionGroupResponse> responseList = permissionGroupServiceImp.findAllPermissionGroup();
-
+    public ResponseEntity<?> getAllAcctStat(){
+        List<AcctStatResponse> list = acctStatServiceImp.findAcctStatusResponse();
         BaseResponse baseResponse = new BaseResponse();
         baseResponse.setStatusCode(200);
-        baseResponse.setData(responseList);
+        baseResponse.setData(list);
 
         return new ResponseEntity<>(baseResponse, HttpStatus.OK);
     }

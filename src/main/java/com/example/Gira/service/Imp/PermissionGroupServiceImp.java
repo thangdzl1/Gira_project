@@ -4,6 +4,6 @@ import com.example.Gira.payload.response.PermissionGroupResponse;
 
 import java.util.List;
 
-public interface PermissionGroupImp {
+public interface PermissionGroupServiceImp {
     List<PermissionGroupResponse> findAllPermissionGroup();
 }
