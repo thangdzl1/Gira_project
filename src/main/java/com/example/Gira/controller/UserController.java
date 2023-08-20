@@ -129,4 +129,12 @@ public class UserController {
         return new ResponseEntity<>("",HttpStatus.OK);
     }
 
+    @GetMapping("/get_by_role")
+    public ResponseEntity<?> getUserByRole(@RequestParam String role){
+        BaseResponse baseResponse = new BaseResponse();
+        baseResponse.setData(userServiceImp.getAllUserByPermissionGroup(role));
+        baseResponse.setStatusCode(200);
+
+        return new ResponseEntity<>(baseResponse,HttpStatus.OK);
+    }
 }

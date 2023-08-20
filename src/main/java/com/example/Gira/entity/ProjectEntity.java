@@ -2,6 +2,7 @@ package com.example.Gira.entity;
 
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity(name = "project")
 public class ProjectEntity {
@@ -32,9 +33,16 @@ public class ProjectEntity {
     @JoinColumn(name = "project_type_id")
     private ProjectTypeEntity typeId;
 
-    @ManyToOne
-    @JoinColumn(name = "tasks_type_id")
-    private TaskTypeEntity taskType;
+    @OneToMany(mappedBy = "project")
+    private Set<TaskTypeEntity> taskType;
+
+    public Set<TaskTypeEntity> getTaskType() {
+        return taskType;
+    }
+
+    public void setTaskType(Set<TaskTypeEntity> taskType) {
+        this.taskType = taskType;
+    }
 
     public TaskProcessEntity getTaskProcess() {
         return taskProcess;
@@ -42,14 +50,6 @@ public class ProjectEntity {
 
     public void setTaskProcess(TaskProcessEntity taskProcess) {
         this.taskProcess = taskProcess;
-    }
-
-    public TaskTypeEntity getTaskType() {
-        return taskType;
-    }
-
-    public void setTaskType(TaskTypeEntity taskType) {
-        this.taskType = taskType;
     }
 
     public int getId() {

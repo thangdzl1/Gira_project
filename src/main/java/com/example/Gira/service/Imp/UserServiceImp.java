@@ -14,5 +14,5 @@ public interface UserServiceImp {
     boolean deleteUser(int id);
     boolean updateUser(UserUpdateRequest request);
     UserDetailsResponse detailsUser(int id);
-
+    List<UserResponse> getAllUserByPermissionGroup(String role);
 }

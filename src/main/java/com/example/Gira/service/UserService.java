@@ -106,7 +106,6 @@ public class UserService implements UserServiceImp {
             AcctStatEntity acctStatEntity = acctStatRepository.findById(request.getAcct_stat_id());
             user.setAcct_stat(acctStatEntity);
             userRepository.save(user);
-            isSuccess = true;
 
             isSuccess = true;
         }catch (Exception e){
@@ -130,5 +129,34 @@ public class UserService implements UserServiceImp {
 
         return new UserDetailsResponse();
     }
+
+    @Override
+    public List<UserResponse> getAllUserByPermissionGroup(String role) {
+
+        List<UserResponse> responseList = new ArrayList<>();
+
+        try {
+            List<UserEntity> list = userRepository.findByPermissionGroup(role);
+            for (UserEntity user : list){
+                UserResponse userResponse = new UserResponse();
+                userResponse.setUsername(user.getUsername());
+                userResponse.setFullname(user.getFullname());
+                userResponse.setEmail(user.getEmail());
+                userResponse.setAvatar(user.getAvatar());
+                userResponse.setId(user.getId());
+                if (user.getPermissionGroup() != null) {
+                    userResponse.setRole(user.getPermissionGroup().getName());
+                }
+                if (user.getAcct_stat() != null) {
+                    userResponse.setStatus(user.getAcct_stat().getName());
+                }
+                responseList.add(userResponse);
+            }
+        }catch (Exception e){
+            throw new CustomException("Error getAllUserByPermissionGroup: " + e.getMessage());
+        }
+        return responseList;
+    }
+
 
 }

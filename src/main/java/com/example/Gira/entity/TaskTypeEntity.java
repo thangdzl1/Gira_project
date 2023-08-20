@@ -15,8 +15,9 @@ public class TaskTypeEntity {
     @Column(name = "desc")
     private String desc;
 
-    @OneToMany(mappedBy = "taskType")
-    private Set<ProjectEntity> project;
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private ProjectEntity project;
 
     @OneToMany(mappedBy = "taskType")
     private Set<TasksEntity> tasks;
@@ -53,11 +54,11 @@ public class TaskTypeEntity {
         this.desc = desc;
     }
 
-    public Set<ProjectEntity> getProject() {
+    public ProjectEntity getProject() {
         return project;
     }
 
-    public void setProject(Set<ProjectEntity> project) {
+    public void setProject(ProjectEntity project) {
         this.project = project;
     }
 }
