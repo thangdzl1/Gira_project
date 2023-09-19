@@ -45,6 +45,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests()//qui định lại các rule liên quan đến chứng thực cho link được gọi
                     .antMatchers("/user/login","/test/**").permitAll()
+                    .antMatchers("/permission_group/get_all").hasAnyAuthority("manager")
                     .anyRequest().authenticated()//tất cả các link còn lại phải được chứng thực
                 .and()
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)

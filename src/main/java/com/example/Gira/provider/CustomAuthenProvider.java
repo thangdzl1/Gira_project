@@ -1,13 +1,18 @@
 package com.example.Gira.provider;
 
+import com.example.Gira.entity.PermissionGroupEntity;
 import com.example.Gira.entity.UserEntity;
+import com.example.Gira.repository.PermissionGroupRepository;
 import com.example.Gira.repository.UserRepository;
+import com.example.Gira.service.Imp.PermissionGroupServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +28,9 @@ public class CustomAuthenProvider implements AuthenticationProvider {
     @Lazy
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private PermissionGroupRepository permissionGroupRepository;
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
@@ -33,7 +41,10 @@ public class CustomAuthenProvider implements AuthenticationProvider {
         UserEntity user = userRepository.findByUsername(username);
         if (user!=null && passwordEncoder.matches(password,user.getPassword())){
             //Đăng nhập thành công
-            return new UsernamePasswordAuthenticationToken(username,user.getPassword(),new ArrayList<>());
+            //Tạo collection authorities
+            ArrayList<GrantedAuthority> authorities = new ArrayList<>();
+            authorities.add(new SimpleGrantedAuthority(((user.getPermissionGroup()).getName())));
+            return new UsernamePasswordAuthenticationToken(username,user.getPassword(),authorities);
         }
         return null;
     }

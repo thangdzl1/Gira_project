@@ -8,3 +8,4 @@ import org.springframework.stereotype.Repository;
 public interface PermissionGroupRepository extends JpaRepository<PermissionGroupEntity,Integer> {
     PermissionGroupEntity findById(int id);
 }
+
