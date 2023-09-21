@@ -16,9 +16,6 @@ public class TaskStatusEntity {
     private int sequenceNumber;
 
     @OneToMany(mappedBy = "taskStatus")
-    private Set<TasksEntity> tasks;
-
-    @OneToMany(mappedBy = "taskStatus")
     private Set<TaskProcessEntity> taskProcess;
 
     public Set<TaskProcessEntity> getTaskProcess() {
@@ -53,11 +50,4 @@ public class TaskStatusEntity {
         this.sequenceNumber = sequenceNumber;
     }
 
-    public Set<TasksEntity> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(Set<TasksEntity> tasks) {
-        this.tasks = tasks;
-    }
 }
