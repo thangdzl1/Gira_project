@@ -18,6 +18,17 @@ public class TaskStatusEntity {
     @OneToMany(mappedBy = "taskStatus")
     private Set<TaskProcessEntity> taskProcess;
 
+    @OneToMany(mappedBy = "taskStatus")
+    private Set<TasksEntity> tasks;
+
+    public Set<TasksEntity> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<TasksEntity> tasks) {
+        this.tasks = tasks;
+    }
+
     public Set<TaskProcessEntity> getTaskProcess() {
         return taskProcess;
     }
