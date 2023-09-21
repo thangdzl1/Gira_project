@@ -13,6 +13,9 @@ public class TaskProcessEntity {
     @OneToMany(mappedBy = "taskProcess")
     private Set<ProjectEntity> project;
 
+    @OneToMany(mappedBy = "taskProcess")
+    private Set<TasksEntity> tasks;
+
     @ManyToOne
     @JoinColumn(name = "task_status_links_id")
     private TaskStatusLinksEntity taskStatusLinks;
@@ -51,5 +54,13 @@ public class TaskProcessEntity {
 
     public void setTaskStatus(TaskStatusEntity taskStatus) {
         this.taskStatus = taskStatus;
+    }
+
+    public Set<TasksEntity> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<TasksEntity> tasks) {
+        this.tasks = tasks;
     }
 }

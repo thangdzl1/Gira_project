@@ -16,8 +16,8 @@ public class TasksEntity {
     private UserEntity manager;
 
     @ManyToOne
-    @JoinColumn(name = "task_status_id")
-    private TaskStatusEntity taskStatus;
+    @JoinColumn(name = "tasks_process_id")
+    private TaskProcessEntity taskProcess;
 
     @ManyToOne
     @JoinColumn(name = "tasks_type_id")
@@ -84,12 +84,12 @@ public class TasksEntity {
         this.manager = manager;
     }
 
-    public TaskStatusEntity getTaskStatus() {
-        return taskStatus;
+    public TaskProcessEntity getTaskProcess() {
+        return taskProcess;
     }
 
-    public void setTaskStatus(TaskStatusEntity taskStatus) {
-        this.taskStatus = taskStatus;
+    public void setTaskProcess(TaskProcessEntity taskProcess) {
+        this.taskProcess = taskProcess;
     }
 
     public TaskTypeEntity getTaskType() {
